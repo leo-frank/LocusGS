@@ -1,8 +1,7 @@
-# LocusGS
-
-
+# <img src="./logo.svg" alt="LocusGS logo" width="48" /> LocusGS
 **LocusGS: Spatially Grounded Tokens for Feed-Forward 3D Gaussian Splatting** <br>
 Wenyu Li, Sidun Liu, Tongrui Hu, Peng Qiao, Yong Dou <br>
+National University of Defense Technology
 
 [**Paper**](https://arxiv.org/abs/2608.12825) · [**Project Page**](https://leo-frank.github.io/LocusGS_viewer/)
 
