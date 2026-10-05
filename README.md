@@ -5,6 +5,7 @@ National University of Defense Technology
 
 [**Paper**](https://arxiv.org/abs/2608.12825) · [**Project Page**](https://leo-frank.github.io/LocusGS_viewer/)
 
+Checkpoint will be released soon.
 
 ## Citation
 
