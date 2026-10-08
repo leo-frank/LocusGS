@@ -66,19 +66,19 @@ class Options:
     geo_sparse_sampling_mode: Literal["multinomial", "topk"] = "multinomial"
     use_dense_sparse_attn_mask: bool = False
     cross_attn_handcraft: bool = False
-    cross_attn_variant: Literal["content_only", "learned_positional", "geometric_positional"] = "learned_positional"
+    cross_attn_variant: Literal["content_only", "learned_positional", "geometric_positional"] = "geometric_positional"
     # Select whether LocusGS self-attention uses learned anchor positional features.
     # "content_only" isolates token-token interaction from anchor position.
     self_attn_variant: Literal["content_only", "learned_positional"] = "learned_positional"
     # --- anchor radius experiment (default off; preserves existing LocusGS behavior)
-    use_anchor_radius: bool = False
+    use_anchor_radius: bool = True
     anchor_radius_init: float = 1.0
     anchor_radius_min: float = 1e-3
     # If True, radius scales the point-to-ray geometric bias bandwidth in cross-attention.
     # Larger radius makes the geometric matching less strict; smaller radius makes it sharper.
     anchor_radius_affects_bias: bool = True
     # If True, decoder layers also refine anchor radius progressively; otherwise radius stays fixed within a forward pass.
-    anchor_radius_refinement: bool = False
+    anchor_radius_refinement: bool = True
     gaussian_center_variant: Literal["radius_scaled_offset", "anchor_offset", "free_center"] = "radius_scaled_offset"
 
     # --- dataset
