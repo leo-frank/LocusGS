@@ -15,6 +15,58 @@ LocusGS follows a **two-stage training** procedure:
 
 Each token predicts 64 Gaussians. RE10K uses two input views for training and evaluation, while DL3DV uses four input views for training and is evaluated with two, four, or six input views.
 
+## How to Train
+
+Run the following commands from the repository root after preparing the datasets and configuring their paths. These commands follow the training blocks in [`scripts/re10k/locusgs_2_input_views_full.sh`](scripts/re10k/locusgs_2_input_views_full.sh) and [`scripts/dl3dv/locusgs_full.sh`](scripts/dl3dv/locusgs_full.sh), using the current `locusgs.train` module. The commands rely on the defaults in `locusgs/options.py` and the dataset-specific presets, so only options that override those defaults are shown.
+
+### RE10K
+
+**Stage 1: Base training**
+
+```bash
+accelerate launch --config_file acc_configs/gpu8.yaml \
+    -m locusgs.train train_re10k_base_2_input_views \
+    --workspace output_dir/locusgs/re10k/locusgs_full \
+    --batch_size 8
+```
+
+**Stage 2: Fine-tuning**
+
+```bash
+accelerate launch --config_file acc_configs/gpu8.yaml \
+    -m locusgs.train finetune_re10k_2view \
+    --workspace output_dir/locusgs/re10k/locusgs_full_finetune \
+    --batch_size 2 \
+    --resume output_dir/locusgs/re10k/locusgs_full/checkpoints/checkpoint_latest/model.safetensors
+```
+
+### DL3DV
+
+**Stage 1: Base training**
+
+```bash
+accelerate launch --config_file acc_configs/gpu8.yaml \
+    -m locusgs.train train_dl3dv_base \
+    --workspace output_dir/locusgs/dl3dv/locusgs_full \
+    --batch_size 8
+```
+
+**Stage 2: Fine-tuning**
+
+```bash
+accelerate launch --config_file acc_configs/gpu8.yaml \
+    -m locusgs.train finetune_dl3dv_4view \
+    --workspace output_dir/locusgs/dl3dv/locusgs_full_finetune \
+    --batch_size 2 \
+    --resume output_dir/locusgs/dl3dv/locusgs_full/checkpoints/epoch_000300/model.safetensors \
+    
+```
+
+
+## Acknowledgements
+
+LocusGS is inspired by [TokenGS](https://github.com/nv-tlabs/TokenGS). We thank the authors for their inspiring work and for making their code publicly available.
+
 ## Citation
 
 If you use LocusGS in your research, please cite:
