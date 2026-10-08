@@ -58,8 +58,7 @@ accelerate launch --config_file acc_configs/gpu8.yaml \
     -m locusgs.train finetune_dl3dv_4view \
     --workspace output_dir/locusgs/dl3dv/locusgs_finetune \
     --batch_size 2 \
-    --resume output_dir/locusgs/dl3dv/locusgs/checkpoints/epoch_000300/model.safetensors \
-    
+    --resume output_dir/locusgs/dl3dv/locusgs/checkpoints/epoch_000300/model.safetensors
 ```
 
 
