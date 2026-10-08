@@ -17,7 +17,7 @@ Each token predicts 64 Gaussians. RE10K uses two input views for training and ev
 
 ## How to Train
 
-Run the following commands from the repository root after preparing the datasets and configuring their paths. These commands follow the training blocks in [`scripts/re10k/locusgs_2_input_views_full.sh`](scripts/re10k/locusgs_2_input_views_full.sh) and [`scripts/dl3dv/locusgs_full.sh`](scripts/dl3dv/locusgs_full.sh), using the current `locusgs.train` module. The commands rely on the defaults in `locusgs/options.py` and the dataset-specific presets, so only options that override those defaults are shown.
+Run the following commands from the repository root after preparing the datasets and configuring their paths. These commands follow the training blocks in [`scripts/re10k/locusgs_2_input_views.sh`](scripts/re10k/locusgs_2_input_views.sh) and [`scripts/dl3dv/locusgs.sh`](scripts/dl3dv/locusgs.sh), using the current `locusgs.train` module. The commands rely on the defaults in `locusgs/options.py` and the dataset-specific presets, so only options that override those defaults are shown.
 
 ### RE10K
 
@@ -26,7 +26,7 @@ Run the following commands from the repository root after preparing the datasets
 ```bash
 accelerate launch --config_file acc_configs/gpu8.yaml \
     -m locusgs.train train_re10k_base_2_input_views \
-    --workspace output_dir/locusgs/re10k/locusgs_full \
+    --workspace output_dir/locusgs/re10k/locusgs \
     --batch_size 8
 ```
 
@@ -35,9 +35,9 @@ accelerate launch --config_file acc_configs/gpu8.yaml \
 ```bash
 accelerate launch --config_file acc_configs/gpu8.yaml \
     -m locusgs.train finetune_re10k_2view \
-    --workspace output_dir/locusgs/re10k/locusgs_full_finetune \
+    --workspace output_dir/locusgs/re10k/locusgs_finetune \
     --batch_size 2 \
-    --resume output_dir/locusgs/re10k/locusgs_full/checkpoints/checkpoint_latest/model.safetensors
+    --resume output_dir/locusgs/re10k/locusgs/checkpoints/checkpoint_latest/model.safetensors
 ```
 
 ### DL3DV
@@ -47,7 +47,7 @@ accelerate launch --config_file acc_configs/gpu8.yaml \
 ```bash
 accelerate launch --config_file acc_configs/gpu8.yaml \
     -m locusgs.train train_dl3dv_base \
-    --workspace output_dir/locusgs/dl3dv/locusgs_full \
+    --workspace output_dir/locusgs/dl3dv/locusgs \
     --batch_size 8
 ```
 
@@ -56,9 +56,9 @@ accelerate launch --config_file acc_configs/gpu8.yaml \
 ```bash
 accelerate launch --config_file acc_configs/gpu8.yaml \
     -m locusgs.train finetune_dl3dv_4view \
-    --workspace output_dir/locusgs/dl3dv/locusgs_full_finetune \
+    --workspace output_dir/locusgs/dl3dv/locusgs_finetune \
     --batch_size 2 \
-    --resume output_dir/locusgs/dl3dv/locusgs_full/checkpoints/epoch_000300/model.safetensors \
+    --resume output_dir/locusgs/dl3dv/locusgs/checkpoints/epoch_000300/model.safetensors \
     
 ```
 
